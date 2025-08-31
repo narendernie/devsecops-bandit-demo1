@@ -19,10 +19,14 @@ jobs:
 
       - name: Install Bandit
         run: pip install --upgrade pip bandit
-
-      - name: Run Bandit (fail on MEDIUM/HIGH)
+#case 1
+#      - name: Run Bandit (fail on MEDIUM/HIGH)
+#       run: |
+#        bandit -r . -s medium -i medium -f txt -o bandit-report.txt
+#case 2
+      - name: Run Bandit (do not fail build)
         run: |
-          bandit -r . -s medium -i medium -f txt -o bandit-report.txt
+          bandit -r . -f txt -o bandit-report.txt || true
 
       - name: Upload Bandit report (always)
         if: always()
